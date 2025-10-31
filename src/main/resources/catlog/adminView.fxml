@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="catlog.AdminController" spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20; -fx-background-color: #f9f9f9;">
+    
+    <!-- Dashboard Title -->
+    <Label text="Admin Dashboard" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2e2e2e;" />
+
+
+    <!-- Add / Update / Delete Section -->
+    <HBox spacing="20" alignment="CENTER">
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Add New Cat" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F3C462;" />
+            <Button text="Add Cat" onAction="#toggleAddCatFields" style="-fx-background-color: #FCECC9; -fx-text-fill: #2e2e2e; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            <VBox fx:id="addCatFields" spacing="8" visible="false" managed="false" style="-fx-padding: 10; -fx-background-color: #FCECC9; -fx-border-color: #FCECC9; -fx-border-radius: 5;">
+                <TextField fx:id="catNameField" promptText="New Cat Name" />
+                <TextField fx:id="catBirthdateField" promptText="New Cat Birthdate (YYYY-MM-DD)" />
+                <TextField fx:id="catGenderField" promptText="New Cat Gender (Male/Female)" />
+                <TextField fx:id="catColorField" promptText="New Cat Color" />
+                <TextField fx:id="catPriceField" promptText="New Cat Price" />
+                <Button text="Submit New Cat" onAction="#handleAddCat" style="-fx-background-color: #62baac; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            </VBox>
+        </VBox>
+
+        <!-- Add User Section -->
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Add New User" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F97C8B;" />
+            <Button text="Add User" onAction="#toggleAddUserFields" style="-fx-background-color: #FCB0B3; -fx-text-fill: #2e2e2e; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            <VBox fx:id="addUserFields" spacing="8" visible="false" managed="false" style="-fx-padding: 10; -fx-background-color: #FCB0B3; -fx-border-color: #FCB0B3; -fx-border-radius: 5;">
+                <TextField fx:id="userNameField" promptText="Name" />
+                <TextField fx:id="userEmailField" promptText="Email" />
+                <TextField fx:id="userPhoneField" promptText="Phone" />
+                <TextField fx:id="userRoleField" promptText="Role (admin/customer)" />
+                <Button text="Submit New User" onAction="#handleAddUser" style="-fx-background-color: #62baac; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            </VBox>
+        </VBox>
+
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Update Existing Cat" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+            <Button text="Update Cat" onAction="#toggleUpdateCatFields" style="-fx-background-color: #7EB2DD; -fx-text-fill: #2e2e2e; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            <VBox fx:id="updateCatFields" spacing="8" visible="false" managed="false" style="-fx-padding: 10; -fx-background-color: #7EB2DD; -fx-border-color: #7EB2DD; -fx-border-radius: 5;">
+                <Button text="Load Cat Details" onAction="#populateUpdateFields" style="-fx-background-color: #445E93; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+                <TextField fx:id="updateCatNameField" promptText="Cat Name" />
+                <TextField fx:id="updateCatBirthdateField" promptText="Cat Birthdate (YYYY-MM-DD)" />
+                <TextField fx:id="updateCatGenderField" promptText="Cat Gender (Male/Female)" />
+                <TextField fx:id="updateCatColorField" promptText="Cat Color" />
+                <TextField fx:id="updateCatPriceField" promptText="Cat Price" />
+                <Button text="Submit Updates" onAction="#handleUpdateCat" style="-fx-background-color: #62baac; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+            </VBox>
+        </VBox>
+
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Delete Cat" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f44336;" />
+            <Button text="Delete Cat" onAction="#handleDeleteCat" style="-fx-background-color: #F93943; -fx-text-fill: #2e2e2e; -fx-font-weight: bold; -fx-background-radius: 5;" maxWidth="200" />
+        </VBox>
+    </HBox>
+
+    <VBox spacing="15" alignment="CENTER">
+        <Label text="View Cats, Customers, and Reservations" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+            <!-- Cats Table -->
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="All Cats" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <TableView fx:id="catTableView" prefWidth="300" prefHeight="200">
+                    <columns>
+                        <TableColumn text="Cat ID" fx:id="catIDColumn" />
+                        <TableColumn text="Name" fx:id="catNameColumn" />
+                        <TableColumn text="Birthdate" fx:id="catBirthdateColumn" />
+                        <TableColumn text="Gender" fx:id="catGenderColumn" />
+                        <TableColumn text="Color" fx:id="catColorColumn" />
+                        <TableColumn text="Price" fx:id="catPriceColumn" />
+                        <TableColumn text="Availability" fx:id="catAvailabilityColumn" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Customers Table -->
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="All Customers" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <TableView fx:id="customerTableView" prefWidth="300" prefHeight="200">
+                    <columns>
+                        <TableColumn text="Customer ID" fx:id="customerIDColumn" />
+                        <TableColumn text="Name" fx:id="customerNameColumn" />
+                        <TableColumn text="Email" fx:id="customerEmailColumn" />
+                        <TableColumn text="Phone" fx:id="customerPhoneColumn" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Reservations Table -->
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="All Reservations" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <TableView fx:id="reservationTableView" prefWidth="300" prefHeight="200">
+                    <columns>
+                        <TableColumn text="Reserve ID" fx:id="reserveIDColumn" />
+                        <TableColumn text="Cat ID" fx:id="reserveCatIDColumn" />
+                        <TableColumn text="Customer ID" fx:id="reserveCustomerIDColumn" />
+                        <TableColumn text="Reserve Date" fx:id="reserveDateColumn" />
+                    </columns>
+                </TableView>
+            </VBox>
+    </VBox>
+</VBox>
